@@ -7,13 +7,13 @@ app = FastAPI(
     title="Chat Assistant API",
     description="AI Chat Assistant with streaming responses and JWT authentication",
     version="1.0.0",
-    docs_url="/docs",
-    redoc_url="/redoc",
 )
+
+origins = [o.strip() for o in settings.ALLOWED_ORIGINS.split(",") if o.strip()]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[settings.FRONTEND_URL, "http://localhost:5173"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
